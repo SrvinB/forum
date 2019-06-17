@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Perfil</title>
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{resource['image/coffe.png']}" />
+	<meta charset="utf-8" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+</h:head>
+<h:body>
+	<header>
+		<h:form style="width: 100%; padding-rigth: 0cm;">
+			<nav class="navbar navbar-expand-lg navbar-light"
+				style="background-color: #e3f2fd;">
+				<div class="navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item"><h:commandButton
+								actionListener="#{perfilController.redirectHomeLog}"
+								class="nav-link" value="Home"
+								style="text-decoration: none; color: #04bcd1; border-color: transparent; background-color: transparent;" /></li>
+						<li class="nav-item"><h:commandButton class="nav-link"
+								value="Quem Somos"
+								style="text-decoration: none; color: #04bcd1; border-color: transparent; background-color: transparent;" /></li>
+
+						<li class="nav-item"><h:commandButton class="nav-link"
+								value="Feed-Back"
+								style="text-decoration: none; color: #04bcd1; border-color: transparent; background-color: transparent;" /></li>
+					</ul>
+				</div>
+
+
+				<div class="row">
+					<div class="btn-group">
+						<button type="button"
+							style="margin-right: 1cm; border: 0px; background-color: transparent;"
+							class="btn dropdown-toggle" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							<h:graphicImage width="50%" library="image" name="userRoot.png" />
+						</button>
+						<div style="margin-right: 1cm;"
+							class="dropdown-menu dropdown-menu-right">
+							<h:commandLink
+								actionListener="#{perfilController.redirectPerfil}"
+								class="dropdown-item" value="Editar Perfil" />
+							<h:commandLink class="dropdown-item" value="Opção 02" />
+							<h:commandLink
+								actionListener="#{perfilController.redirectMenuRoot}"
+								class="dropdown-item" value="Adminstrador" />
+							<div class="dropdown-divider"></div>
+							<h:commandLink actionListener="#{perfilController.redirectSair}"
+								class="dropdown-item" value="Sair" />
+						</div>
+					</div>
+				</div>
+			</nav>
+		</h:form>
+	</header>
+	<div class="container shadow-lg p-4 mb-6 bg-white rounded-lg"
+		style="width: 50%; margin-top: 2%;">
+		<BR />
+
+		<h:messages globalOnly="true" class="alert alert-danger" />
+		<h:form>
+			<div class="row">
+				<div class="col">
+					<h:outputText for="exampleFormControlh:inputText1" value="NOME" />
+					<h:inputText value="#{perfilController.user.name}" id="itNome"
+						type="text" class="form-control" disabled="true" />
+				</div>
+				<div class="col">
+					<h:outputText for="exampleFormControlh:inputText1" value="NICK" />
+					<h:inputText value="#{perfilController.user.nick}" id="itNick"
+						type="text" class="form-control" />
+					<div style="padding-top: 3px;">
+						<h:message class="alert-danger"
+							style="padding: 3px; border-radius: 5px;" for="itNick" />
+					</div>
+				</div>
+			</div>
+			<BR />
+			<div class="form-row">
+				<div class="col-3">
+					<h:outputText for="exampleFormControlh:inputText1" value="DDD" />
+					<h:inputText value="#{perfilController.user.phone.ddd}" type="text"
+						class="form-control" />
+				</div>
+				<div class="col">
+					<h:outputText for="exampleFormControlh:inputText1" value="TELEFONE" />
+					<h:inputText value="#{perfilController.user.phone.number}"
+						type="text" class="form-control" />
+				</div>
+			</div>
+			<BR />
+			<div class="form-row">
+				<div class="col">
+					<h:outputText value="EMAIL:" />
+					<h:inputText value="#{perfilController.user.email.logIn}"
+						id="itEmail" class="form-control" disabled="true" />
+				</div>
+				<div class="col">
+					<h:outputText value="SENHA:" />
+					<h:inputSecret value="#{perfilController.user.email.password}"
+						id="itSenha" class="form-control" />
+					<div style="padding-top: 3px;">
+						<h:message class="alert-danger"
+							style="padding: 3px; border-radius: 5px;" for="itSenha" />
+					</div>
+				</div>
+			</div>
+			<BR />
+			<h:commandButton value="SALVAR ALTERAÇÕES" type="submit"
+				actionListener="#{perfilController.alterar}"
+				class="btn btn-secondary btn-lg btn-block">
+			
+				<f:ajax execute="@this"/>
+			</h:commandButton>
+		</h:form>
+		<BR />
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</h:body>
+</html>

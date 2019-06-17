@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+	<meta charset="utf8" />
+	<title>Consulta</title>
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{resource['image/coffe.png']}" />
+
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="cascuda.qs.css" />
+</h:head>
+
+<h:body>
+	<header>
+		<h:form style="width: 100%; padding-rigth: 0cm;">
+			<nav class="navbar navbar-expand-lg navbar-light"
+				style="background-color: #e3f2fd;">
+				<div class="navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item"><h:commandButton
+								actionListener="#{consultaController.redirectHomeLog}"
+								class="nav-link" value="Home"
+								style="text-decoration: none; color: #04bcd1; border-color: transparent; background-color: transparent;" /></li>
+						<li class="nav-item"><h:commandButton class="nav-link"
+								value="Quem Somos"
+								style="text-decoration: none; color: #04bcd1; border-color: transparent; background-color: transparent;" /></li>
+
+						<li class="nav-item"><h:commandButton class="nav-link"
+								value="Feed-Back"
+								style="text-decoration: none; color: #04bcd1; border-color: transparent; background-color: transparent;" /></li>
+					</ul>
+				</div>
+
+
+				<div class="row">
+					<div class="btn-group">
+						<button type="button"
+							style="margin-right: 1cm; border: 0px; background-color: transparent;"
+							class="btn dropdown-toggle" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							<h:graphicImage width="50%" library="image" name="userRoot.png" />
+						</button>
+						<div style="margin-right: 1cm;"
+							class="dropdown-menu dropdown-menu-right">
+							<h:commandLink actionListener="#{consultaController.redirectPerfil}" class="dropdown-item" value="Editar Perfil" />
+							<h:commandLink class="dropdown-item" value="Opção 02" />
+							<h:commandLink actionListener="#{consultaController.redirectMenuRoot}" class="dropdown-item" value="Adminstrador" />
+							<div class="dropdown-divider"></div>
+							<h:commandLink actionListener="#{consultaController.redirectSair}"
+								class="dropdown-item" value="Sair" />
+						</div>
+					</div>
+				</div>
+			</nav>
+		</h:form>
+	</header>
+	<BR />
+	<BR />
+	<div class="container">
+		<H1>Administrador(a) #{consultaController.connectUser.name}!!</H1>
+		<BR />
+		<h:form>
+			<div class="row">
+				<div class="col">
+					<h:inputText value="#{consultaController.quemBuscar}"
+						class="form-control" />
+				</div>
+				<div class="col">
+					<h:commandButton class="btn btn-secondary" id="procurar"
+						value="BUSCAR" actionListener="#{consultaController.pesquisar}">
+						<f:ajax execute="@form" render="busca" />
+					</h:commandButton>
+				</div>
+			</div>
+		</h:form>
+		<BR /> <BR />
+
+		<h:form class="table" id="busca">
+			<h:dataTable class="thead-dark table-striped col"
+				value="#{consultaController.listaUsuario}" var="user">
+				<h:column id="name">
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{user.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nick</f:facet>
+					<h:outputText value="#{user.nick}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Tipo do Usuario</f:facet>
+					<h:outputText value="#{user.typeUser}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Email</f:facet>
+					<h:outputText value="#{user.email.logIn}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Telefone</f:facet>
+					<h:outputText value="#{user.phone.number}" />
+				</h:column>
+				<h:column>
+					<h:commandLink actionListener="#{consultaController.edit(user)}"
+						style="border: 0px; background-color: transparent;">
+						<h:graphicImage width="15%" library="image" name="edit.png" />
+					</h:commandLink>
+
+					<h:commandLink actionListener="#{consultaController.delete(user)}"
+						value=" " style="border: 0px; background-color: transparent;">
+						<h:graphicImage width="15%" library="image" name="delete.png" />
+						<f:ajax execute="@this" render="busca" />
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</h:body>
+</html>
